@@ -1,41 +1,3 @@
-// const perfectNumber = (n) => {
-//     z = 0
-//     for (let i = 1; i < n; i++) {
-//         if (n % i == 0) {
-//             // z.push(i)
-//             z += i
-//         }
-//     }
-//     return z
-// }
-
-// let zx = []
-// for (i = 1; i < 1000; i++) {
-//     if (perfectNumber(i) === i) zx.push(i)
-// }
-
-// console.log(zx);
-
-
-
-// if (z.length >= 2) {
-//     z = [z[0], z[1], z[2]]
-// }
-
-
-
-// // f(n) =(2^{n-1})*((2^{n}+1)-1)
-
-// const test = (x) => {
-//     let xz = (2 ** (x - 1)) * (2 ** x - 1)
-//     return xz
-// }
-
-// console.log(test(4));
-
-// console.log(perfectNumber());
-
-
 const isValid = (s) => {
     let z = []
     for (i = 0; i < s.length; i++) {
@@ -49,4 +11,62 @@ const isValid = (s) => {
     return z.length ? false : true
 }
 
-console.log(isValid('[](){}['));
+// console.log(isValid('[](){}['),1);
+
+let mergeTwoLists = (list1, list2) => {
+    //     // !solve 1
+
+    //     // const z = []
+    //     // list1.forEach(element => {
+    //     //     z.push(element)
+    //     // });
+    //     // list2.forEach(element => {
+    //     //     z.push(element)
+    //     // });
+    //     // return z.sort()
+
+    //     // !solve 2
+    //     // return list1.concat(list2).sort()
+
+    //     // !solve 3
+    if (!list1) {
+        return list2;
+    }
+    if (!list2) {
+        return list1;
+    }
+    let head = null;
+    let temp = head;
+    if (list1.val < list2.val) {
+        temp = head = new ListNode(list1.val);
+        list1 = list1.next;
+    } else {
+        temp = head = new ListNode(list2.val);
+        list2 = list2.next;
+    }
+    // Loop until any of the list becomes null
+    while (list1 && list2) {
+        if (list1.val < list2.val) {
+            temp.next = new ListNode(list1.val);
+            list1 = list1.next;
+            temp = temp.next;
+        } else {
+            temp.next = new ListNode(list2.val);
+            list2 = list2.next;
+            temp = temp.next;
+        }
+    }
+    while (list1) {
+        temp.next = new ListNode(list1.val);
+        list1 = list1.next;
+        temp = temp.next;
+    }
+    while (list2) {
+        temp.next = new ListNode(list2.val);
+        list2 = list2.next;
+        temp = temp.next;
+    }
+    return head;
+};
+
+console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]), 2);
